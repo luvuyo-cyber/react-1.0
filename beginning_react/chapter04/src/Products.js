@@ -15,7 +15,7 @@ class Products extends Component {
     return [
       {
         imageUrl: "http://loremflickr.com/150/150?random=1",
-        productName: "Products 1",
+        productName: "Product 1",
         releasedDate: "28 November 2024",
         description: "Our first product.",
         rating: 1,
@@ -23,7 +23,7 @@ class Products extends Component {
       },
       {
         imageUrl: "http://loremflickr.com/150/150?random=2",
-        productName: "Products 2",
+        productName: "Product 2",
         releasedDate: "28 November 2024",
         description: "Our second product.",
         rating: 2,
@@ -31,7 +31,7 @@ class Products extends Component {
       },
       {
         imageUrl: "http://loremflickr.com/150/150?random=3",
-        productName: "Products 3",
+        productName: "Product 3",
         releasedDate: "28 November 2024",
         description: "Our third product.",
         rating: 3,
@@ -39,7 +39,7 @@ class Products extends Component {
       },
       {
         imageUrl: "http://loremflickr.com/150/150?random=4",
-        productName: "Products 4",
+        productName: "Product 4",
         releasedDate: "28 November 2024",
         description: "Our fourth product.",
         rating: 4,
@@ -47,7 +47,7 @@ class Products extends Component {
       },
       {
         imageUrl: "http://loremflickr.com/150/150?random=5",
-        productName: "Products 5",
+        productName: "Product 5",
         releasedDate: "28 November 2024",
         description: "Our fifth product.",
         rating: 5,
