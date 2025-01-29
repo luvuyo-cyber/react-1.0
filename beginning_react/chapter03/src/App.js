@@ -7,7 +7,7 @@ import Rating from "./Rating";
 class App extends Component {
   render() {
     //disable button on condition using css class
-    const isValid = true;
+    const isValid = false;
 
     //passing data into our rating component using props
 
