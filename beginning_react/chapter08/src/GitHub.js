@@ -1,28 +1,23 @@
 import React, { Component } from "react";
-import axios from "axios";
+import axios from "axios"; // npm install axios
 import ReactLoading from "react-loading";
-import Card from "react-bootstrap/Card";
-import { Form, Button } from "react-bootstrap";
+import { Media, Form, Button, Nav } from "react-bootstrap";
 
-class Github extends Component {
-  //constructors should be lightweight and not contain any costly operations, for basic initializations like state
+class GitHub extends Component {
   constructor() {
     super();
     this.state = {
-      //create state variables
-      isLoading: false,
-      searchTerm: "",
       data: [],
+      searchTerm: "",
+      isLoading: false,
     };
-
-    //bindings for the handleChange and handleSubmit methods
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  //is called after the constructor
-  //   componentDidMount() {
-  //     this.getGitHubData("greg");
-  //   }
+
+  // componentDidMount() {
+  //     // this.getGitHubData('greg');
+  // }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -32,45 +27,38 @@ class Github extends Component {
     this.getGitHubData(this.state.searchTerm);
   }
 
-  //handles changing searchTerm state
   handleChange(e) {
     this.setState({ searchTerm: e.target.value });
   }
 
-  //returns github data from API endpoint, using axios
   getGitHubData(_searchTerm) {
     axios
       .get("https://api.github.com/search/users?q=" + _searchTerm)
       .then((res) => {
         this.setState({
           isLoading: false,
-          data: res.data.items, //assign results to our empty array
+          data: res.data.items,
         });
-        console.log(res.data.items);
       });
   }
-
   render() {
     const listUsers = this.state.data.map((user) => (
-      <Card key={user.id}>
-        <a href={user.html_url}>
-          <Card.Img
+      <Media key={user.id}>
+        <Nav.Link href={`/github/user/${user.login}/${user.id}`}>
+          <img
             width={64}
             height={64}
             className="mr-3"
             src={user.avatar_url}
             alt="Generic placeholder"
           />
-        </a>
-        <Card.Body>
+        </Nav.Link>
+        <Media.Body>
           <h5>Login: {user.login}</h5>
-          <p>ID: {user.id}</p>
-        </Card.Body>
-      </Card>
+          <p>Id: {user.id}</p>
+        </Media.Body>
+      </Media>
     ));
-
-    // && conditional makes it visible when loading
-    // return <div>{this.state.isLoading && <h4>Getting data...</h4>}</div>;
 
     return (
       <div>
@@ -82,18 +70,17 @@ class Github extends Component {
               placeholder="Enter Search Term"
               onChange={this.handleChange}
             />
-          </Form.Group>
-          {""}
+          </Form.Group>{" "}
           <Button type="submit">Search</Button>
         </Form>
-        <h3>Github Users Results</h3>
+        <h3>GitHub Users Results</h3>
         {this.state.isLoading && (
           <ReactLoading type="spinningBubbles" color="#444" />
         )}
+
         {listUsers}
       </div>
     );
   }
 }
-
-export default Github;
+export default GitHub;
