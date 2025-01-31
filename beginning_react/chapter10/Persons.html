@@ -43,7 +43,7 @@
             age: action.personData.age,
           };
           return {
-            ...state,
+            ...state, //get copy of the existing state
             persons: state.persons.concat(newPerson),
           };
         } else if (action.type === "REMOVE") {
@@ -54,9 +54,23 @@
             ),
           };
         } else {
-          return state;
+          return state; //other action type, return current state unaltered
         }
       }
+
+      //====================store code=====================================
+      var store = Redux.createStore(reducer);
+      store.subscribe(showState); //show state each time it's modified
+
+      function showState() {
+        console.log(store.getState());
+      }
+
+      //   store.dispatch(addPerson(1, "Luvuyo", 12));
+      //   store.dispatch(addPerson(2, "Asanda", 13));
+      //   store.dispatch(addPerson(3, "Bhabha", 14));
+      //   store.dispatch(addPerson(4, "Thabo", 15));
+      //   store.dispatch(removePerson(4));
     </script>
   </body>
 </html>
