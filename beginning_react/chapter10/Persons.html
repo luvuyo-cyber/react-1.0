@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>List of Persons</title>
+    <script src="https://unpkg.com/redux@4.0.1/dist/redux.js"></script>
+  </head>
+  <body>
+    <script>
+      // =====================action code==============================
+      //return an action object
+      function addPerson(id, name, age) {
+        return {
+          type: "ADD", //describes what kind of action we are performing
+          personData: {
+            //payload
+            id: id,
+            name: name,
+            age: age,
+          },
+        };
+      }
+
+      function removePerson(id) {
+        return {
+          type: "REMOVE",
+          personId: id,
+        };
+      }
+
+      //===================reducer code=================================
+      const initialState = {
+        persons: [],
+      };
+
+      function reducer(state, action) {
+        if (state === undefined) {
+          state = initialState;
+        }
+        if (action.type === "ADD") {
+          const newPerson = {
+            id: action.personData.id,
+            name: action.personData.name,
+            age: action.personData.age,
+          };
+          return {
+            ...state,
+            persons: state.persons.concat(newPerson),
+          };
+        } else if (action.type === "REMOVE") {
+          return {
+            ...state,
+            persons: state.persons.filter(
+              (person) => person.id !== action.personId
+            ),
+          };
+        } else {
+          return state;
+        }
+      }
+    </script>
+  </body>
+</html>
