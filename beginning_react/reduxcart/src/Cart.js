@@ -6,7 +6,7 @@ class Cart extends Component {
   render() {
     return (
       <div className="container">
-        <AddProduct AddProduct={this.props.onAddProduct} />
+        <AddProduct addProduct={this.props.onAddProduct} />
         <Table>
           <thead>
             <tr>
@@ -20,8 +20,12 @@ class Cart extends Component {
               <tr key={productData.productName}>
                 <td>{productData.productName}</td>
                 <td>{productData.productPrice}</td>
-                <td onClick={() => this.props.onDeleteProduct(productData)}>
-                  Remove
+                <td>
+                  <button
+                    onClick={() => this.props.onDeleteProduct(productData)}
+                  >
+                    Remove
+                  </button>
                 </td>
               </tr>
             ))}
