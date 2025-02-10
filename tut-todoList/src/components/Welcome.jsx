@@ -6,6 +6,8 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
+import "./welcome.css";
+import TodoSVG from "../assets/todo-svg.svg";
 
 const Welcome = () => {
   const [email, setEmail] = useState("");
@@ -68,6 +70,7 @@ const Welcome = () => {
 
   return (
     <div className="welcome">
+      <img src={TodoSVG} className="todo-svg" />
       <h1>Todo-List</h1>
       <div className="login-register-container">
         {isRegistering ? (
@@ -116,19 +119,40 @@ const Welcome = () => {
                 })
               }
             />
-            <button onClick={handleRegister}>Register</button>
-            <button onClick={() => setIsRegistering(false)}>Go Back</button>
+            <button
+              className="sign-in-register-button"
+              onClick={handleRegister}
+            >
+              Register
+            </button>
+            <button
+              className="create-account-button"
+              onClick={() => setIsRegistering(false)}
+            >
+              Go Back
+            </button>
           </>
         ) : (
           <>
-            <input type="email" onChange={handleEmailChange} value={email} />
             <input
+              placeholder="Email"
+              type="email"
+              onChange={handleEmailChange}
+              value={email}
+            />
+            <input
+              placeholder="Password"
               type="password"
               onChange={handlePasswordChange}
               value={password}
             />
-            <button onClick={handleSignIn}>Sign In</button>
-            <button onClick={() => setIsRegistering(true)}>
+            <button className="sign-in-register-button" onClick={handleSignIn}>
+              Sign In
+            </button>
+            <button
+              className="create-account-button"
+              onClick={() => setIsRegistering(true)}
+            >
               Create an Account
             </button>
           </>

@@ -4,6 +4,12 @@ import { auth, db } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import { uid } from "uid";
 import { set, ref, onValue, remove, update } from "firebase/database";
+import "./homepage.css";
+import AddIcon from "@mui/icons-material/Add";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import LogoutIcon from "@mui/icons-material/Logout";
+import CheckIcon from "@mui/icons-material/Check";
 
 const Homepage = () => {
   const [todo, setTodo] = useState("");
@@ -67,8 +73,9 @@ const Homepage = () => {
 
   const navigate = useNavigate();
   return (
-    <div>
+    <div className="homepage">
       <input
+        className="add-edit-input"
         type="text"
         placeholder="Add Todo ..."
         value={todo}
@@ -76,24 +83,32 @@ const Homepage = () => {
       />
 
       {todos.map((todo) => (
-        <div>
-          <h4>{todo.todo}</h4>
-          <button onClick={() => handleUpdate(todo)}>Update</button>
-          <button onClick={() => handleDelete(todo.uidd)}>Delete</button>
+        <div className="todo">
+          <h1>{todo.todo}</h1>
+          <EditIcon
+            fontSize="large"
+            onClick={() => handleUpdate(todo)}
+            className="edit-button"
+          />
+          <DeleteIcon
+            fontSize="large"
+            onClick={() => handleDelete(todo.uidd)}
+            className="delete-button"
+          />
         </div>
       ))}
 
       {isEdit ? (
         <div>
-          <button onClick={handleEditConfirm}>Confirm</button>
+          <CheckIcon onClick={handleEditConfirm} className="add-confirm-icon" />
         </div>
       ) : (
         <div>
-          <button onClick={writeToDatabase}>Add</button>
+          <AddIcon className="add-confirm-icon" onClick={writeToDatabase} />
         </div>
       )}
 
-      <button onClick={handleSignOut}>Sign Out</button>
+      <LogoutIcon onClick={handleSignOut} className="logout-icon" />
     </div>
   );
 };
